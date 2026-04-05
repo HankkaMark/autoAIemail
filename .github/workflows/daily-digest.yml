@@ -1,5 +1,5 @@
-# 北京时间每天 08:00 = UTC 00:00
-name: Daily AI VC digest email
+# 北京时间每天 08:00 = UTC 00:00（中国无夏令时）
+name: Daily AI PM digest email (08:00 Beijing)
 
 on:
   schedule:
@@ -32,4 +32,6 @@ jobs:
           DIGEST_TZ: ${{ secrets.DIGEST_TZ }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_TEMPERATURE: ${{ secrets.OPENAI_TEMPERATURE }}
         run: npm run digest

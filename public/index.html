@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>今日 AI 创投 · 热门五条</title>
+    <title>AI PM 晨报 · 9 条</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -157,6 +157,97 @@
         color: var(--muted);
       }
 
+      .badge-lens {
+        background: var(--accent-dim);
+        color: var(--accent);
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 600;
+      }
+
+      .star-grid {
+        display: grid;
+        gap: 0.45rem 0;
+        margin: 0.75rem 0 0;
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      .star-row {
+        display: grid;
+        grid-template-columns: 5.2rem 1fr;
+        gap: 0.5rem 0.75rem;
+        align-items: start;
+      }
+
+      .star-k {
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding-top: 0.15rem;
+      }
+
+      .star-v {
+        color: var(--text);
+      }
+
+      .pm-hint {
+        margin-top: 0.65rem;
+        padding: 0.55rem 0.65rem;
+        border-radius: 8px;
+        background: rgba(94, 234, 212, 0.08);
+        border: 1px solid rgba(94, 234, 212, 0.2);
+        font-size: 0.84rem;
+        color: #a7f3d0;
+      }
+
+      .pm-hint strong {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .headline-cn {
+        font-size: 1.08rem;
+        font-weight: 600;
+        margin: 0 0 0.35rem;
+        line-height: 1.4;
+        color: var(--text);
+      }
+
+      .link-row {
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+      }
+
+      .link-row a {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .link-row a:hover {
+        text-decoration: underline;
+      }
+
+      .orig-title {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 0.35rem;
+        line-height: 1.4;
+      }
+
+      .banner-hint {
+        font-size: 0.82rem;
+        color: var(--warn);
+        background: rgba(251, 191, 36, 0.08);
+        border: 1px solid rgba(251, 191, 36, 0.25);
+        padding: 0.65rem 0.85rem;
+        border-radius: var(--radius);
+        margin-bottom: 1rem;
+      }
+
       .error {
         border-color: rgba(248, 113, 113, 0.4);
         background: rgba(248, 113, 113, 0.08);
@@ -194,15 +285,71 @@
         font-size: 0.78rem;
         color: var(--muted);
       }
+
+      .section-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 1.75rem 0 0.85rem;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid var(--border);
+        letter-spacing: -0.02em;
+      }
+
+      .section-title:first-of-type {
+        margin-top: 0.5rem;
+      }
+
+      .brief-block {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--text);
+        margin: 0.5rem 0 0.75rem;
+      }
+
+      .layperson-block {
+        font-size: 0.88rem;
+        line-height: 1.62;
+        color: #c5d0e0;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.75rem 0.9rem;
+        margin: 0.5rem 0 0.65rem;
+      }
+
+      .layperson-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.35rem;
+      }
+
+      .hook-block {
+        font-size: 0.84rem;
+        line-height: 1.55;
+        color: #a7f3d0;
+        padding: 0.5rem 0.65rem;
+        border-radius: 8px;
+        background: rgba(94, 234, 212, 0.1);
+        border: 1px solid rgba(94, 234, 212, 0.22);
+        margin: 0.5rem 0 0;
+      }
     </style>
   </head>
   <body>
     <div class="wrap">
       <header>
-        <h1>今日 AI 创投圈 · 热门五条</h1>
+        <h1>AI PM 面试备战 · 每日 9 条</h1>
         <p class="sub">
-          通过 Google News / Bing News 的公开 RSS
-          实时聚合，去重后按时效排序，展示当前最靠前的 5 条。
+          三栏各 <strong>3 条</strong>：<strong>技术·论文·趋势</strong> /
+          <strong>初创·融资·热度</strong> /
+          <strong>成长·工具·vibe coding</strong>。多源 RSS
+          去重后按栏目内时效与关键词排序。配置
+          <code style="color:var(--accent);">OPENAI_API_KEY</code>
+          后，每条含<strong>简述</strong>、<strong>外行也能懂的补充</strong>（公司身位/技术例子等）、<strong>面试一句</strong>，并附原文链接。
         </p>
       </header>
 
@@ -211,24 +358,33 @@
         <span class="meta" id="status"></span>
       </div>
 
+      <div id="banner"></div>
       <div id="content"></div>
 
       <footer>
-        数据来源为新闻聚合 RSS，标题与链接指向原始报道；若某源暂时不可用，列表可能少于 5 条。
+        数据来自公开 RSS；简述与补充由模型基于标题与摘录生成，请以原文为准。某栏不足 3
+        条时多为该源暂时不可用。
       </footer>
     </div>
 
     <script>
       const content = document.getElementById("content");
+      const banner = document.getElementById("banner");
       const status = document.getElementById("status");
       const refreshBtn = document.getElementById("refresh");
 
+      const BUCKET_LABEL = {
+        tech_trends: "技术 · 论文 · 趋势",
+        startups_funding: "初创 · 融资 · 热度",
+        career_tools: "成长 · 工具 · vibe coding",
+      };
+
       function loading() {
-        content.innerHTML = Array(5)
+        content.innerHTML = Array(9)
           .fill(0)
           .map(() => '<div class="skeleton"></div>')
           .join("");
-        status.textContent = "正在联网拉取…";
+        status.textContent = "正在拉取 9 条并生成简述（可能需几十秒）…";
         refreshBtn.disabled = true;
       }
 
@@ -271,29 +427,30 @@
             " 条 · 更新 " +
             fmtTime(data.fetchedAt);
 
-          content.innerHTML = data.items
-            .map(
-              (item, i) => `
-            <article class="card">
-              <h2><a href="${escapeAttr(
-                item.link
-              )}" target="_blank" rel="noopener noreferrer">${escapeHtml(
-                item.title
-              )}</a></h2>
-              <div class="row">
-                <span class="badge badge-src">#${i + 1}</span>
-                ${
-                  item.isToday
-                    ? '<span class="badge badge-today">今日</span>'
-                    : ""
-                }
-                <span>${escapeHtml(item.source || "")}</span>
-                <span>${escapeHtml(fmtTime(item.pubDate) || "时间未知")}</span>
-              </div>
-            </article>
-          `
-            )
-            .join("");
+          const sm = data.digestMeta || {};
+          if (sm.usedAi) {
+            banner.innerHTML = "";
+          } else if (!sm.openAiConfigured) {
+            banner.innerHTML =
+              '<div class="banner-hint">未检测到有效的 <code>OPENAI_API_KEY</code>。请检查 <code>.env</code> 与 <code>package.json</code> 同目录、变量名正确，改完后重启 <code>npm start</code>。</div>';
+          } else {
+            const errRaw = sm.error || "未知错误";
+            const err =
+              errRaw.length > 400 ? errRaw.slice(0, 400) + "…" : errRaw;
+            const hintBlock = sm.hint
+              ? "<p style=\"margin:0.75rem 0 0;line-height:1.55;\"><strong>怎么处理：</strong>" +
+                escapeHtml(sm.hint) +
+                "</p>"
+              : "";
+            banner.innerHTML =
+              '<div class="banner-hint">已读取到 API Key，但 <strong>部分或全部简述生成失败</strong>。原因：<code style="word-break:break-all;">' +
+              escapeHtml(err) +
+              "</code>" +
+              hintBlock +
+              '<p style="margin:0.75rem 0 0;">请查看终端日志；成功栏目仍会显示简述。</p></div>';
+          }
+
+          content.innerHTML = renderSections(data.items);
         } catch (e) {
           refreshBtn.disabled = false;
           content.innerHTML =
@@ -314,6 +471,72 @@
 
       function escapeAttr(s) {
         return escapeHtml(s).replace(/'/g, "&#39;");
+      }
+
+      function renderSections(items) {
+        let html = "";
+        let lastBucket = null;
+        let n = 0;
+        for (const item of items) {
+          if (item.bucket !== lastBucket) {
+            lastBucket = item.bucket;
+            const lab = BUCKET_LABEL[item.bucket] || item.bucket;
+            html += `<h2 class="section-title">${escapeHtml(lab)}</h2>`;
+          }
+          n += 1;
+          html += renderCard(item, n);
+        }
+        return html;
+      }
+
+      function renderCard(item, globalNum) {
+        const d = item.digest;
+        const bucketTag = item.bucketLabel
+          ? `<span class="badge badge-lens">${escapeHtml(item.bucketLabel)}</span>`
+          : "";
+
+        if (!d) {
+          return `
+            <article class="card">
+              <div class="row" style="margin-bottom:0.5rem;">
+                <span class="badge badge-src">#${globalNum}</span>
+                ${item.isToday ? '<span class="badge badge-today">今日</span>' : ""}
+                ${bucketTag}
+                <span>${escapeHtml(item.source || "")}</span>
+                <span>${escapeHtml(fmtTime(item.pubDate) || "时间未知")}</span>
+              </div>
+              <h2 style="font-size:1rem;margin:0 0 0.5rem;line-height:1.45;"><a href="${escapeAttr(item.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.title)}</a></h2>
+              ${
+                item.snippet
+                  ? `<p style="margin:0 0 0.75rem;font-size:0.88rem;color:var(--muted);line-height:1.55;">${escapeHtml(item.snippet)}</p>`
+                  : ""
+              }
+              <div class="link-row"><a href="${escapeAttr(item.link)}" target="_blank" rel="noopener noreferrer">阅读原文 →</a></div>
+            </article>`;
+        }
+
+        const hook = d.interview_hook
+          ? `<div class="hook-block"><strong>面试一句</strong>：${escapeHtml(d.interview_hook)}</div>`
+          : "";
+
+        return `
+          <article class="card">
+            <div class="row" style="margin-bottom:0.5rem;">
+              <span class="badge badge-src">#${globalNum}</span>
+              ${item.isToday ? '<span class="badge badge-today">今日</span>' : ""}
+              ${bucketTag}
+              <span>${escapeHtml(item.source || "")}</span>
+              <span>${escapeHtml(fmtTime(item.pubDate) || "时间未知")}</span>
+            </div>
+            <p class="brief-block">${escapeHtml(d.brief)}</p>
+            <div class="layperson-block">
+              <div class="layperson-label">外行补充 · 背景 / 例子 / 身位</div>
+              ${escapeHtml(d.layperson_note)}
+            </div>
+            ${hook}
+            <div class="link-row"><a href="${escapeAttr(item.link)}" target="_blank" rel="noopener noreferrer">阅读原文 →</a></div>
+            <p class="orig-title">原标题：${escapeHtml(item.title)}</p>
+          </article>`;
       }
 
       refreshBtn.addEventListener("click", load);
