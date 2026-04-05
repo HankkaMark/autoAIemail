@@ -1,0 +1,20 @@
+{
+  "name": "ai-vc-news",
+  "version": "1.0.0",
+  "private": true,
+  "description": "今日 AI 创投热门新闻聚合页",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "digest": "node scripts/sendDailyDigest.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemailer": "^6.9.16",
+    "rss-parser": "^3.13.0"
+  }
+}

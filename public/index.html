@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>今日 AI 创投 · 热门五条</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0c0f14;
+        --surface: #141a24;
+        --border: #243044;
+        --text: #e8edf5;
+        --muted: #8b9bb8;
+        --accent: #5eead4;
+        --accent-dim: rgba(94, 234, 212, 0.15);
+        --warn: #fbbf24;
+        --radius: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Noto Sans SC", "DM Sans", system-ui, sans-serif;
+        background: radial-gradient(
+            ellipse 120% 80% at 50% -20%,
+            rgba(94, 234, 212, 0.12),
+            transparent 55%
+          ),
+          var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+
+      header {
+        margin-bottom: 2rem;
+      }
+
+      h1 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.5rem;
+      }
+
+      .sub {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      button {
+        font-family: inherit;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 0.65rem 1.2rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      }
+
+      button:hover:not(:disabled) {
+        border-color: var(--accent);
+        background: var(--accent-dim);
+      }
+
+      button:active:not(:disabled) {
+        transform: scale(0.98);
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.35rem;
+        margin-bottom: 0.85rem;
+      }
+
+      .card h2 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0 0 0.65rem;
+        line-height: 1.45;
+      }
+
+      .card h2 a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .card h2 a:hover {
+        color: var(--accent);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2rem 0.55rem;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .badge-today {
+        background: rgba(251, 191, 36, 0.2);
+        color: var(--warn);
+      }
+
+      .badge-src {
+        background: rgba(139, 155, 184, 0.15);
+        color: var(--muted);
+      }
+
+      .error {
+        border-color: rgba(248, 113, 113, 0.4);
+        background: rgba(248, 113, 113, 0.08);
+        color: #fecaca;
+        padding: 1rem 1.25rem;
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+      }
+
+      .skeleton {
+        height: 5.5rem;
+        border-radius: var(--radius);
+        background: linear-gradient(
+          90deg,
+          var(--surface) 0%,
+          #1c2533 50%,
+          var(--surface) 100%
+        );
+        background-size: 200% 100%;
+        animation: sh 1.2s ease-in-out infinite;
+        margin-bottom: 0.85rem;
+      }
+
+      @keyframes sh {
+        0% {
+          background-position: 100% 0;
+        }
+        100% {
+          background-position: -100% 0;
+        }
+      }
+
+      footer {
+        margin-top: 2.5rem;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>今日 AI 创投圈 · 热门五条</h1>
+        <p class="sub">
+          通过 Google News / Bing News 的公开 RSS
+          实时聚合，去重后按时效排序，展示当前最靠前的 5 条。
+        </p>
+      </header>
+
+      <div class="toolbar">
+        <button type="button" id="refresh">重新搜索</button>
+        <span class="meta" id="status"></span>
+      </div>
+
+      <div id="content"></div>
+
+      <footer>
+        数据来源为新闻聚合 RSS，标题与链接指向原始报道；若某源暂时不可用，列表可能少于 5 条。
+      </footer>
+    </div>
+
+    <script>
+      const content = document.getElementById("content");
+      const status = document.getElementById("status");
+      const refreshBtn = document.getElementById("refresh");
+
+      function loading() {
+        content.innerHTML = Array(5)
+          .fill(0)
+          .map(() => '<div class="skeleton"></div>')
+          .join("");
+        status.textContent = "正在联网拉取…";
+        refreshBtn.disabled = true;
+      }
+
+      function fmtTime(iso) {
+        if (!iso) return "";
+        try {
+          const d = new Date(iso);
+          return d.toLocaleString("zh-CN", {
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        } catch {
+          return "";
+        }
+      }
+
+      async function load() {
+        loading();
+        try {
+          const r = await fetch("/api/top-news", { cache: "no-store" });
+          const data = await r.json();
+          refreshBtn.disabled = false;
+
+          if (!data.ok || !data.items?.length) {
+            content.innerHTML =
+              '<div class="error">暂时无法获取新闻：' +
+              (data.error || "无数据，请稍后重试或检查网络。") +
+              "</div>";
+            status.textContent = data.fetchedAt
+              ? "更新时间 " + fmtTime(data.fetchedAt)
+              : "";
+            return;
+          }
+
+          status.textContent =
+            "共 " +
+            data.items.length +
+            " 条 · 更新 " +
+            fmtTime(data.fetchedAt);
+
+          content.innerHTML = data.items
+            .map(
+              (item, i) => `
+            <article class="card">
+              <h2><a href="${escapeAttr(
+                item.link
+              )}" target="_blank" rel="noopener noreferrer">${escapeHtml(
+                item.title
+              )}</a></h2>
+              <div class="row">
+                <span class="badge badge-src">#${i + 1}</span>
+                ${
+                  item.isToday
+                    ? '<span class="badge badge-today">今日</span>'
+                    : ""
+                }
+                <span>${escapeHtml(item.source || "")}</span>
+                <span>${escapeHtml(fmtTime(item.pubDate) || "时间未知")}</span>
+              </div>
+            </article>
+          `
+            )
+            .join("");
+        } catch (e) {
+          refreshBtn.disabled = false;
+          content.innerHTML =
+            '<div class="error">请求失败：' +
+            escapeHtml(e.message || String(e)) +
+            "</div>";
+          status.textContent = "";
+        }
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function escapeAttr(s) {
+        return escapeHtml(s).replace(/'/g, "&#39;");
+      }
+
+      refreshBtn.addEventListener("click", load);
+      load();
+    </script>
+  </body>
+</html>
